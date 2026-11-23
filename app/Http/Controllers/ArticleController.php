@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\NewArticleMail;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
@@ -33,6 +34,8 @@ class ArticleController extends Controller
         if ($request->hasFile('img')) {
             $validated['img'] = $request->file('img')->store('articles', 'public');
         }
+
+        $validated['user_id'] = Auth::id();
 
         $article = Article::create($validated);
 

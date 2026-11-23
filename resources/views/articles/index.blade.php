@@ -19,6 +19,9 @@
                         <span class="badge rounded-pill text-bg-danger mb-2 align-self-start">{{ $article->technique }}</span>
                         <h5 class="card-title fw-bold">{{ $article->title }}</h5>
                         <p class="card-text text-muted">{{ \Illuminate\Support\Str::limit($article->description, 100) }}</p>
+                        <p class="small text-secondary mb-3">
+                            Creato da: <strong>{{ $article->user->name ?? 'Utente sconosciuto' }}</strong>
+                        </p>
                         <div class="mt-auto d-flex flex-wrap gap-2">
                             <a href="{{ route('articles.show', $article) }}" class="btn btn-sm btn-outline-dark">Dettagli</a>
                             <a href="{{ route('articles.edit', $article) }}" class="btn btn-sm btn-outline-primary">Modifica</a>
