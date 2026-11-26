@@ -15,9 +15,30 @@
                 <li class="nav-item">
                     <a class="nav-link text-white fw-semibold" href="{{ route('contact') }}">✉️ Contattaci</a>
                 </li>
-                <li class="nav-item">
-                    <a class="btn btn-warning text-dark fw-bold btn-sm px-3" href="{{ route('articles.create') }}">+ Pubblica Disegno</a>
-                </li>
+
+                @guest
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link text-white fw-semibold" href="{{ route('login') }}">Accedi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-light text-dark fw-bold btn-sm px-3" href="{{ route('register') }}">Registrati</a>
+                    </li>
+                @endguest
+
+                @auth
+                    <li class="nav-item">
+                        <a class="btn btn-warning text-dark fw-bold btn-sm px-3" href="{{ route('articles.create') }}">+ Pubblica Disegno</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <span class="nav-link text-white fw-semibold">Ciao, {{ Auth::user()->name }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-light btn-sm fw-semibold">Logout</button>
+                        </form>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>
